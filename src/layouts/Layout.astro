@@ -1,0 +1,143 @@
+---
+import "../styles/global.css";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+
+interface Props {
+  title: string;
+  description: string;
+  keywords?: string;
+  ogImage?: string;
+  canonicalUrl?: string;
+  customSchema?: object;
+}
+
+const {
+  title,
+  description,
+  keywords = "AC Dealers Shahjahanpur, Electronics Store Shahjahanpur, Havells Dealer Shahjahanpur, Water Cooler Shahjahanpur",
+  ogImage = "/images/hero_showcase.jpg",
+  canonicalUrl,
+  customSchema,
+} = Astro.props;
+
+const currentCanonical = canonicalUrl || Astro.url.href;
+
+// Business NAP Information
+const nap = {
+  name: "Jai Jwala Enterprises",
+  hindiName: "जय ज्वाला एंटरप्राइजेज",
+  established: 2006,
+  address: "Old Flyover Road, Town Hall Road, Shahjahanpur, Uttar Pradesh 242001",
+  phone: "094150 35442",
+  hours: "10:00 AM – 9:30 PM daily",
+  payment: ["UPI", "Cash"],
+  services: ["In-store shopping", "Kerbside pickup", "Delivery"],
+  googleRating: 5.0,
+  justdialRating: 4.9,
+};
+
+// Base LocalBusiness Schema (Always present on all pages)
+const localBusinessSchema = {
+  "@context": "https://schema.org",
+  "@type": "ElectronicsStore",
+  "@id": "https://jaijwalaenterprises.com/#store",
+  "name": nap.name,
+  "alternateName": nap.hindiName,
+  "description": "Premium electronics store and authorized dealer of Voltas, Daikin, Blue Star, Symphony, Havells, Samsung, LG in Shahjahanpur.",
+  "url": "https://jaijwalaenterprises.com",
+  "logo": "https://jaijwalaenterprises.com/logo.jpg",
+  "image": "https://jaijwalaenterprises.com/images/hero_showcase.jpg",
+  "telephone": "+919415035442",
+  "priceRange": "$$",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Old Flyover Road, Town Hall Road",
+    "addressLocality": "Shahjahanpur",
+    "addressRegion": "Uttar Pradesh",
+    "postalCode": "242001",
+    "addressCountry": "IN"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": "27.8837",
+    "longitude": "79.9122"
+  },
+  "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+      "Sunday"
+    ],
+    "opens": "10:00",
+    "closes": "21:30"
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.9",
+    "reviewCount": "180"
+  }
+};
+---
+
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/jpeg" href="/logo.jpg" />
+    <meta name="generator" content={Astro.generator} />
+    
+    <!-- Primary Meta Tags -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="keywords" content={keywords} />
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href={currentCanonical} />
+
+    <!-- Google Font Preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={Astro.url.href} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL(ogImage, Astro.site || Astro.url.origin)} />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={Astro.url.href} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={new URL(ogImage, Astro.site || Astro.url.origin)} />
+
+    <!-- JSON-LD LocalBusiness Schema -->
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(localBusinessSchema)} />
+    
+    <!-- Custom Page Schema (e.g. Product/Service Schema) -->
+    {customSchema && (
+      <script type="application/ld+json" is:inline set:html={JSON.stringify(customSchema)} />
+    )}
+  </head>
+  <body class="bg-canvas text-body font-text min-h-screen flex flex-col antialiased">
+    <!-- Header Component -->
+    <Header />
+
+    <!-- Main Content Area -->
+    <main class="flex-grow">
+      <slot />
+    </main>
+
+    <!-- Footer Component -->
+    <Footer nap={nap} />
+  </body>
+</html>

@@ -1,0 +1,117 @@
+---
+// Footer.astro
+interface Props {
+  nap: {
+    name: string;
+    hindiName: string;
+    established: number;
+    address: string;
+    phone: string;
+    hours: string;
+    payment: string[];
+    services: string[];
+    googleRating: number;
+    justdialRating: number;
+  };
+}
+
+const { nap } = Astro.props;
+
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="bg-canvas-parchment text-ink-muted-80 border-t border-hairline py-[64px] px-lg">
+  <div class="max-w-[1440px] mx-auto grid grid-cols-1 md:grid-cols-4 gap-xl">
+    <!-- Brand / Description Column -->
+    <div class="flex flex-col gap-md">
+      <div class="h-[36px] flex items-center select-none">
+        <img src="/logo.jpg" alt="Jai Jwala Logo" class="h-full object-contain rounded-xs" />
+      </div>
+      <p class="text-caption text-ink-muted-80 max-w-[300px] leading-relaxed">
+        Premium electronics and home appliances showroom in Shahjahanpur. Providing authorized sales and expert advice since 2006.
+      </p>
+      <div class="flex flex-col gap-xxs text-caption text-ink-muted-48">
+        <div>Google Rating: <span class="text-primary font-semibold">★ {nap.googleRating}.0 / 5.0</span></div>
+        <div>Justdial Rating: <span class="text-primary font-semibold">★ {nap.justdialRating} / 5.0</span></div>
+      </div>
+    </div>
+
+    <!-- Product Links Column -->
+    <div class="flex flex-col">
+      <span class="text-caption-strong text-ink font-semibold uppercase tracking-wider mb-sm">Products</span>
+      <div class="flex flex-col text-dense-link text-ink-muted-80">
+        <a href="/products/water-coolers" class="hover:text-primary transition-colors focus:outline-2 focus:outline-primary-focus">Water Coolers</a>
+        <a href="/products/air-conditioners" class="hover:text-primary transition-colors focus:outline-2 focus:outline-primary-focus">Air Conditioners</a>
+        <a href="/products/air-coolers" class="hover:text-primary transition-colors focus:outline-2 focus:outline-primary-focus">Air Coolers</a>
+        <a href="/products/refrigerators" class="hover:text-primary transition-colors focus:outline-2 focus:outline-primary-focus">Refrigerators</a>
+        <a href="/products/led-tvs" class="hover:text-primary transition-colors focus:outline-2 focus:outline-primary-focus">LED TVs</a>
+        <a href="/products/fans" class="hover:text-primary transition-colors focus:outline-2 focus:outline-primary-focus">Ceiling & Exhaust Fans</a>
+      </div>
+    </div>
+
+    <!-- Site Links Column -->
+    <div class="flex flex-col">
+      <span class="text-caption-strong text-ink font-semibold uppercase tracking-wider mb-sm">Jai Jwala Enterprises</span>
+      <div class="flex flex-col text-dense-link text-ink-muted-80">
+        <a href="/" class="hover:text-primary transition-colors focus:outline-2 focus:outline-primary-focus">Home</a>
+        <a href="/about" class="hover:text-primary transition-colors focus:outline-2 focus:outline-primary-focus">About JJE</a>
+        <a href="/reviews" class="hover:text-primary transition-colors focus:outline-2 focus:outline-primary-focus">Testimonials</a>
+        <a href="/contact" class="hover:text-primary transition-colors focus:outline-2 focus:outline-primary-focus">Contact Us</a>
+        <a href="/sitemap-index.xml" class="hover:text-primary transition-colors focus:outline-2 focus:outline-primary-focus">Sitemap</a>
+      </div>
+    </div>
+
+    <!-- Local SEO NAP Consistency Block -->
+    <div class="flex flex-col gap-sm border-t md:border-t-0 md:border-l border-hairline pt-xl md:pt-0 md:pl-xl">
+      <span class="text-caption-strong text-ink font-semibold uppercase tracking-wider">Contact & Location</span>
+      
+      <div class="flex flex-col gap-xs text-caption leading-relaxed">
+        <!-- Business Name -->
+        <div>
+          <span class="font-semibold text-ink">{nap.name}</span>
+          <span class="block text-xs font-semibold text-primary">{nap.hindiName}</span>
+        </div>
+        
+        <!-- Address -->
+        <div>
+          <span class="block text-xs uppercase text-ink-muted-48">Showroom Address</span>
+          <p class="text-ink-muted-80 font-medium">{nap.address}</p>
+        </div>
+
+        <!-- Phone -->
+        <div>
+          <span class="block text-xs uppercase text-ink-muted-48">Phone Number</span>
+          <a href={`tel:${nap.phone.replace(/\s+/g, '')}`} class="text-primary font-semibold hover:underline block text-[15px]">{nap.phone}</a>
+        </div>
+
+        <!-- Hours -->
+        <div>
+          <span class="block text-xs uppercase text-ink-muted-48">Business Hours</span>
+          <span class="text-ink-muted-80 font-medium">{nap.hours}</span>
+        </div>
+
+        <!-- Services/Payment -->
+        <div class="grid grid-cols-2 gap-xxs text-xs text-ink-muted-48 border-t border-hairline pt-xs">
+          <div>
+            <span class="font-semibold block text-[10px] text-ink">SERVICES</span>
+            {nap.services.join(', ')}
+          </div>
+          <div>
+            <span class="font-semibold block text-[10px] text-ink">PAYMENTS</span>
+            {nap.payment.join(', ')}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Copyright and Legal -->
+  <div class="max-w-[1440px] mx-auto border-t border-hairline mt-xl pt-lg flex flex-col sm:flex-row justify-between items-center gap-md text-fine-print text-ink-muted-48 select-none">
+    <span>&copy; {currentYear} {nap.name}. Established {nap.established}. All rights reserved.</span>
+    <div class="flex gap-lg">
+      <span>Near Town Hall Hockey Club</span>
+      <span>Near Bus Stand Road</span>
+      <span>Shahjahanpur, UP</span>
+    </div>
+  </div>
+</footer>

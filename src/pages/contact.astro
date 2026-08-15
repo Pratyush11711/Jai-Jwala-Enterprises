@@ -1,0 +1,106 @@
+---
+import Layout from "../layouts/Layout.astro";
+import ContactForm from "../components/ContactForm.astro";
+---
+
+<Layout 
+  title="Contact Us | Jai Jwala Enterprises Shahjahanpur"
+  description="Contact Jai Jwala Enterprises on Old Flyover Road, Town Hall Road, Shahjahanpur. Phone: 094150 35442. Hours: 10:00 AM – 9:30 PM. Get driving directions and submit an inquiry."
+>
+  <!-- Hero Section -->
+  <section class="bg-canvas-parchment py-[60px] border-b border-hairline px-lg">
+    <div class="max-w-[1440px] mx-auto text-center flex flex-col items-center gap-md">
+      <span class="text-tagline text-primary uppercase font-semibold tracking-wider font-display">Get In Touch</span>
+      <h1 class="text-hero-display text-ink font-semibold tracking-tight font-display leading-[1.07] uppercase">
+        CONTACT OUR <span class="text-primary text-display-lg block">SHOWROOM</span>
+      </h1>
+      <p class="text-lead text-ink-muted-80 max-w-[800px] leading-relaxed font-light">
+        Have questions about product models, specifications, pricing, or stock availability? Call us directly or drop an inquiry below.
+      </p>
+    </div>
+  </section>
+
+  <!-- Content Section -->
+  <section class="bg-canvas py-[80px] px-lg">
+    <div class="max-w-[1440px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-xl">
+      <!-- Contact Info & Map Column (7 Cols) -->
+      <div class="lg:col-span-7 flex flex-col gap-xl">
+        <!-- Text/NAP info -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-lg text-left">
+          <!-- Address Card -->
+          <div class="bg-canvas-parchment border border-hairline rounded-lg p-lg shadow-sm">
+            <span class="text-caption-strong text-primary uppercase font-semibold block mb-xxs">Showroom Location</span>
+            <span class="text-body-strong text-ink block font-semibold mb-xxs">Jai Jwala Enterprises</span>
+            <p class="text-caption text-ink-muted-80 leading-relaxed font-light">
+              Old Flyover Road, Town Hall Road, Shahjahanpur, Uttar Pradesh 242001
+            </p>
+            <span class="text-xs text-ink-muted-48 mt-sm block font-medium">Near Town Hall Hockey Club / Bus Stand Road</span>
+          </div>
+
+          <!-- Quick Connect Card -->
+          <div class="bg-canvas-parchment border border-hairline rounded-lg p-lg shadow-sm">
+            <span class="text-caption-strong text-primary uppercase font-semibold block mb-xxs">Quick Connect</span>
+            <span class="text-body-strong text-ink block font-semibold mb-xxs">Telephone Number</span>
+            <a href="tel:09415035442" class="text-lead text-primary font-bold hover:underline block mb-xxs">094150 35442</a>
+            
+            <span class="text-xs text-ink-muted-48 block font-medium mt-xs">Operating Hours</span>
+            <p class="text-caption text-ink-muted-80 leading-relaxed font-light">10:00 AM – 9:30 PM daily</p>
+          </div>
+        </div>
+
+        <!-- Details Grid -->
+        <div class="bg-canvas border border-hairline rounded-lg p-lg shadow-sm grid grid-cols-1 sm:grid-cols-3 gap-md text-left">
+          <div>
+            <span class="text-caption-strong text-ink block font-semibold mb-xxs">Services Available</span>
+            <ul class="text-caption text-ink-muted-80 list-disc pl-sm space-y-xxs font-light">
+              <li>In-store shopping</li>
+              <li>Kerbside pickup</li>
+              <li>Local delivery</li>
+            </ul>
+          </div>
+          <div>
+            <span class="text-caption-strong text-ink block font-semibold mb-xxs">Payment Methods</span>
+            <ul class="text-caption text-ink-muted-80 list-disc pl-sm space-y-xxs font-light">
+              <li>UPI / QR Code</li>
+              <li>Cash</li>
+            </ul>
+          </div>
+          <div>
+            <span class="text-caption-strong text-ink block font-semibold mb-xxs">Showroom Rating</span>
+            <div class="text-caption text-ink-muted-80 font-light space-y-xxs">
+              <div>Google: <span class="text-primary font-semibold">★ 5.0 / 5.0</span></div>
+              <div>Justdial: <span class="text-primary font-semibold">★ 4.9 / 5.0</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Google Maps Embed Container -->
+        <div class="w-full overflow-hidden rounded-lg border border-hairline shadow-sm h-[350px]">
+          <iframe 
+            title="Jai Jwala Enterprises Shahjahanpur Showroom Map Location"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3527.1818276632426!2d79.9100223!3d27.8837059!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399f36fdfd58cf5f%3A0xe4a485ff7de3cfb9!2sTown%20Hall%2C%20Shahjahanpur%2C%20Uttar%20Pradesh%20242001!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" 
+            width="100%" 
+            height="100%" 
+            style="border:0;" 
+            allowfullscreen="" 
+            loading="lazy" 
+            referrerpolicy="no-referrer-when-downgrade"
+          ></iframe>
+        </div>
+      </div>
+
+      <!-- Form Column (5 Cols) -->
+      <div class="lg:col-span-5 flex flex-col gap-md text-left">
+        <h2 class="text-display-md text-ink font-semibold tracking-tight font-display">
+          Send An Inquiry
+        </h2>
+        <p class="text-caption text-ink-muted-80 leading-relaxed font-light mb-sm">
+          Please fill out the form below. Our showroom representative will contact you with model specifications, availability, and pricing.
+        </p>
+
+        <!-- Interactive Contact Form Component -->
+        <ContactForm />
+      </div>
+    </div>
+  </section>
+</Layout>

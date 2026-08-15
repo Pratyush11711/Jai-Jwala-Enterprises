@@ -1,0 +1,218 @@
+---
+// ContactForm.astro
+// Static form with client-side validation and simulation fallback
+
+interface Props {
+  selectedCategory?: string;
+}
+
+const { selectedCategory = "" } = Astro.props;
+
+const categories = [
+  { id: "water-coolers", name: "Water Coolers" },
+  { id: "air-conditioners", name: "Air Conditioners" },
+  { id: "air-coolers", name: "Air Coolers" },
+  { id: "refrigerators", name: "Refrigerators" },
+  { id: "led-tvs", name: "LED TVs" },
+  { id: "fans", name: "Ceiling & Exhaust Fans" },
+  { id: "washing-machines", name: "Washing Machines" },
+  { id: "Home theather & sound systems", name: "Sound Systems " },
+  { id: "other electrical-goods", name: "Other Electrical Goods " },
+];
+
+const formAction = import.meta.env.PUBLIC_FORM_ACTION || "https://formspree.io/f/placeholder";
+---
+
+<div class="bg-canvas border border-hairline rounded-lg p-lg shadow-sm">
+  <form id="contact-form" action={formAction} method="POST" class="space-y-md">
+    <!-- Form Notification Banner -->
+    <div id="form-banner" class="hidden text-caption py-xs px-sm rounded-xs border font-semibold transition-all"></div>
+
+    <!-- Name Field -->
+    <div class="flex flex-col gap-xxs">
+      <label for="name" class="text-caption-strong text-ink font-semibold">Your Name <span class="text-primary">*</span></label>
+      <input 
+        type="text" 
+        id="name" 
+        name="name" 
+        placeholder="Enter your full name" 
+        class="bg-canvas text-body text-ink border border-hairline rounded-pill px-lg py-sm h-[44px] focus:outline-2 focus:outline-primary-focus w-full"
+        required
+      />
+    </div>
+
+    <!-- Phone Field -->
+    <div class="flex flex-col gap-xxs">
+      <label for="phone" class="text-caption-strong text-ink font-semibold">Phone Number <span class="text-primary">*</span></label>
+      <input 
+        type="tel" 
+        id="phone" 
+        name="phone" 
+        placeholder="Enter 10-digit mobile number" 
+        class="bg-canvas text-body text-ink border border-hairline rounded-pill px-lg py-sm h-[44px] focus:outline-2 focus:outline-primary-focus w-full"
+        required
+      />
+    </div>
+
+    <!-- Product Category Field -->
+    <div class="flex flex-col gap-xxs">
+      <label for="product-category" class="text-caption-strong text-ink font-semibold">Product of Interest</label>
+      <select 
+        id="product-category" 
+        name="category" 
+        class="bg-canvas text-body text-ink border border-hairline rounded-pill px-lg h-[44px] focus:outline-2 focus:outline-primary-focus w-full appearance-none cursor-pointer"
+      >
+        <option value="">-- Select Category (Optional) --</option>
+        {categories.map(c => (
+          <option value={c.id} selected={selectedCategory === c.id}>{c.name}</option>
+        ))}
+      </select>
+    </div>
+
+    <!-- Message Field -->
+    <div class="flex flex-col gap-xxs">
+      <label for="message" class="text-caption-strong text-ink font-semibold">Your Message <span class="text-primary">*</span></label>
+      <textarea 
+        id="message" 
+        name="message" 
+        rows="4" 
+        placeholder="Describe what products or services you are looking for..." 
+        class="bg-canvas text-body text-ink border border-hairline rounded-[18px] px-lg py-sm focus:outline-2 focus:outline-primary-focus w-full resize-none"
+        required
+      ></textarea>
+    </div>
+
+    <!-- Hidden configuration triggers for Formspree / Netlify / Vercel -->
+    <input type="text" name="_gotcha" class="hidden" />
+
+    <!-- Submit Button -->
+    <button 
+      type="submit" 
+      id="submit-button"
+      class="bg-primary text-on-primary text-body font-medium w-full py-[11px] rounded-pill btn-scale-active cursor-pointer shadow-sm border border-primary-focus hover:bg-primary-focus transition-all flex items-center justify-center gap-xs focus:outline-2 focus:outline-primary-focus"
+    >
+      <span>Send Inquiry</span>
+      <svg id="submit-spinner" class="hidden animate-spin h-5 w-5 text-on-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+      </svg>
+    </button>
+  </form>
+</div>
+
+<script>
+  // Dynamic parsing of URL query params to pre-select category
+  window.addEventListener('DOMContentLoaded', () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const productParam = urlParams.get('product') || urlParams.get('category');
+    if (productParam) {
+      const selectElement = document.getElementById('product-category') as HTMLSelectElement;
+      if (selectElement) {
+        selectElement.value = productParam;
+      }
+    }
+  });
+
+  const form = document.getElementById('contact-form') as HTMLFormElement;
+  const banner = document.getElementById('form-banner');
+  const submitBtn = document.getElementById('submit-button') as HTMLButtonElement;
+  const spinner = document.getElementById('submit-spinner');
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    // Inputs
+    const nameInput = (form.querySelector('#name') as HTMLInputElement);
+    const phoneInput = (form.querySelector('#phone') as HTMLInputElement);
+    const messageInput = (form.querySelector('#message') as HTMLTextAreaElement);
+
+    const name = nameInput.value.trim();
+    const phone = phoneInput.value.trim();
+    const message = messageInput.value.trim();
+
+    // Reset banner
+    showBanner('', 'hide');
+
+    // 1. Client-side validation
+    if (!name || !phone || !message) {
+      showBanner('Please fill in all required fields.', 'error');
+      return;
+    }
+
+    // Phone format: Indian standard 10 digits
+    const phoneRegex = /^[6789]\d{9}$/;
+    if (!phoneRegex.test(phone.replace(/[\s-+]/g, ''))) {
+      showBanner('Please enter a valid 10-digit Indian mobile number.', 'error');
+      phoneInput.focus();
+      return;
+    }
+
+    // Set loading state
+    setLoading(true);
+
+    try {
+      const formData = new FormData(form);
+      const action = form.action || '';
+
+      // Check if endpoint is unconfigured placeholder
+      if (action.includes('placeholder') || action === '') {
+        // Local developer simulation
+        await new Promise(resolve => setTimeout(resolve, 800)); // Mimic network lag
+        console.log('Form submission simulation:', Object.fromEntries(formData));
+        showBanner('Thank you! Your inquiry has been sent successfully (Local Simulation Mode).', 'success');
+        form.reset();
+        setLoading(false);
+        return;
+      }
+
+      // Actual fetch submit
+      const response = await fetch(action, {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+
+      if (response.ok) {
+        showBanner('Thank you! Your message has been sent. We will get back to you shortly.', 'success');
+        form.reset();
+      } else {
+        const result = await response.json();
+        showBanner(result.errors?.[0]?.message || 'Something went wrong. Please try again or contact us directly.', 'error');
+      }
+    } catch (err) {
+      showBanner('Network error. Please check your connection and try again.', 'error');
+    } finally {
+      setLoading(false);
+    }
+  });
+
+  function setLoading(isLoading: boolean) {
+    if (!submitBtn || !spinner) return;
+    submitBtn.disabled = isLoading;
+    if (isLoading) {
+      submitBtn.classList.add('opacity-80', 'cursor-not-allowed');
+      spinner.classList.remove('hidden');
+    } else {
+      submitBtn.classList.remove('opacity-80', 'cursor-not-allowed');
+      spinner.classList.add('hidden');
+    }
+  }
+
+  function showBanner(text: string, type: 'success' | 'error' | 'hide') {
+    if (!banner) return;
+    banner.innerText = text;
+    banner.className = 'text-caption py-xs px-sm rounded-xs border font-semibold transition-all';
+    
+    if (type === 'hide' || !text) {
+      banner.classList.add('hidden');
+    } else if (type === 'success') {
+      banner.classList.remove('hidden');
+      banner.classList.add('bg-green-950/20', 'text-green-600', 'border-green-800/30');
+    } else {
+      banner.classList.remove('hidden');
+      banner.classList.add('bg-red-950/20', 'text-red-600', 'border-red-800/30');
+    }
+  }
+</script>

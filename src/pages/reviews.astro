@@ -1,0 +1,135 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const reviewsList = [
+  {
+    name: "Rajesh Kumar",
+    rating: 5,
+    date: "July 12, 2026",
+    source: "Google Reviews",
+    text: "Jai Jwala Enterprises is definitely the best electronics store in Shahjahanpur. Bought a Blue Star water cooler for our commercial kitchen. The pricing was lower than online rates, and they arranged delivery within 2 hours. Very satisfied!",
+  },
+  {
+    name: "Siddharth Mishra",
+    rating: 5,
+    date: "May 28, 2026",
+    source: "Justdial",
+    text: "Best AC Dealers on Town Hall Road. We bought two Daikin split ACs for our office. The owner personally explained the power saving specs and inverter tech. Clean installation and superb customer service.",
+  },
+  {
+    name: "Amit Sharma",
+    rating: 5,
+    date: "August 2, 2026",
+    source: "Google Reviews",
+    text: "Highly recommend JJE for Havells electrical items. They have an extensive range of modular switches and safe copper wires. Honest rates, prompt response, and reliable UPI payment support.",
+  },
+  {
+    name: "Dr. Alok Verma",
+    rating: 5,
+    date: "June 19, 2026",
+    source: "Google Reviews",
+    text: "Outstanding service. Bought a Samsung double door refrigerator last week. They assisted us in choosing the right convertible models. Free delivery near Town Hall Hockey Club and very polite delivery guys.",
+  },
+  {
+    name: "Vikram Singh",
+    rating: 5,
+    date: "April 15, 2026",
+    source: "Justdial",
+    text: "Authorized Blue Star dealer that sells genuine products. We purchased a 60-liter water chiller for our office. Running perfectly. Best pricing in Shahjahanpur. Highly recommended.",
+  },
+  {
+    name: "Meera Devi",
+    rating: 5,
+    date: "March 30, 2026",
+    source: "Google Reviews",
+    text: "Bought a washing machine and two ceiling fans. They gave a great package discount. The sales consultant was extremely patient and showed multiple options. Highly satisfied with the experience.",
+  },
+];
+---
+
+<Layout 
+  title="Customer Reviews & Testimonials | Jai Jwala Enterprises"
+  description="Read reviews from customers of Jai Jwala Enterprises in Shahjahanpur. Rated 5.0 on Google and 4.9 on Justdial. See testimonials about water coolers, ACs."
+>
+  <!-- Hero Section -->
+  <section class="bg-canvas-parchment py-[60px] border-b border-hairline px-lg">
+    <div class="max-w-[1440px] mx-auto text-center flex flex-col items-center gap-md">
+      <span class="text-tagline text-primary uppercase font-semibold tracking-wider font-display">Customer Satisfaction</span>
+      <h1 class="text-hero-display text-ink font-semibold tracking-tight font-display leading-[1.07] uppercase">
+        CLIENT TESTIMONIALS & <span class="text-primary text-display-lg block">REVIEWS</span>
+      </h1>
+      <p class="text-lead text-ink-muted-80 max-w-[800px] leading-relaxed font-light">
+        We take pride in our service. Hear from our clients in Shahjahanpur about their buying and installation experiences.
+      </p>
+    </div>
+  </section>
+
+  <!-- Ratings Overview Banner -->
+  <section class="bg-canvas py-xl px-lg border-b border-hairline">
+    <div class="max-w-[980px] mx-auto bg-canvas-parchment border border-hairline rounded-lg p-lg shadow-sm grid grid-cols-1 md:grid-cols-2 gap-lg divide-y md:divide-y-0 md:divide-x divide-hairline">
+      <!-- Google Column -->
+      <div class="flex flex-col items-center justify-center p-md text-center">
+        <span class="text-caption-strong text-ink uppercase font-semibold tracking-wider mb-xxs">Google Ratings</span>
+        <span class="text-display-lg text-primary font-bold">5.0</span>
+        <div class="flex text-primary mb-xs">★★★★★</div>
+        <span class="text-fine-print text-ink-muted-48">Based on verified customer reviews</span>
+      </div>
+
+      <!-- Justdial Column -->
+      <div class="flex flex-col items-center justify-center p-md text-center">
+        <span class="text-caption-strong text-ink uppercase font-semibold tracking-wider mb-xxs">Justdial Ratings</span>
+        <span class="text-display-lg text-primary font-bold">4.9</span>
+        <div class="flex text-primary mb-xs">★★★★★</div>
+        <span class="text-fine-print text-ink-muted-48">Based on listings near Town Hall, Shahjahanpur</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reviews List Grid -->
+  <section class="bg-canvas py-[80px] px-lg">
+    <div class="max-w-[1440px] mx-auto text-left flex flex-col gap-xl">
+      <h2 class="text-display-lg text-ink font-semibold tracking-tight font-display text-center">
+        What Our Clients Say
+      </h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-lg">
+        {reviewsList.map(r => (
+          <div class="bg-canvas-parchment border border-hairline rounded-lg p-lg flex flex-col gap-sm hover:border-primary transition-all shadow-sm">
+            <div class="flex justify-between items-center w-full">
+              <span class="text-body-strong text-ink font-semibold">{r.name}</span>
+              <span class="text-caption text-primary font-semibold">{r.source}</span>
+            </div>
+            <div class="flex text-primary">
+              {"★".repeat(r.rating)}
+            </div>
+            <p class="text-caption text-ink-muted-80 leading-relaxed font-light italic">
+              "{r.text}"
+            </p>
+            <span class="text-[12px] text-ink-muted-48 mt-auto block text-right">{r.date}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Leave a Review CTA Box -->
+  <section class="bg-canvas-parchment py-[80px] px-lg border-t border-hairline">
+    <div class="max-w-[800px] mx-auto text-center flex flex-col items-center gap-md">
+      <h2 class="text-display-lg text-ink font-semibold tracking-tight font-display">
+        Have You Visited Our Showroom?
+      </h2>
+      <p class="text-body-copy text-ink-muted-80 leading-relaxed max-w-[600px] font-light">
+        If you are one of our customers, we would love to hear your feedback. Your reviews help us maintain our standard of quality.
+      </p>
+      
+      <div class="flex flex-wrap gap-sm justify-center pt-sm w-full sm:w-auto">
+        <a href="/contact" class="bg-primary text-on-primary font-medium text-caption rounded-pill px-lg py-sm btn-scale-active shadow-sm border border-primary-focus hover:bg-primary-focus transition-all text-center flex-grow sm:flex-grow-0 focus:outline-2 focus:outline-primary-focus">
+          Write Feedback
+        </a>
+        <a href="tel:09415035442" class="border border-primary text-primary font-medium text-caption rounded-pill px-lg py-sm btn-scale-active bg-transparent hover:bg-primary/5 transition-all text-center flex-grow sm:flex-grow-0 focus:outline-2 focus:outline-primary-focus">
+          Call Showroom
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>

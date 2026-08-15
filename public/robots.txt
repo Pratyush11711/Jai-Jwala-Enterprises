@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://jaijwalaenterprises.com/sitemap-index.xml

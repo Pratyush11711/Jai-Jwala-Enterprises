@@ -1,0 +1,133 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { Image } from "astro:assets";
+import aboutShowroomImg from "../assets/images/about_showroom.jpg";
+
+const values = [
+  { title: "Product Honesty", desc: "We only deal in original equipment backed by certified brand warranties. No grey-market or unverified stock." },
+  { title: "Service Consistency", desc: "From purchasing advice to professional delivery and installation, our priority is long-term product performance." },
+  { title: "Local Reliability", desc: "Located near Town Hall Hockey Club since 2006. We are readily available for help whenever our customers call." },
+];
+
+const brandPartners = [
+  "Blue Star", "Voltas", "Daikin", "Symphony", "Havells", "Samsung", "LG", "Whirlpool", "IFB", "Lloyd", "Usha", "Atomberg"
+];
+---
+
+<Layout 
+  title="About Us | Jai Jwala Enterprises Shahjahanpur"
+  description="Established in 2006, Jai Jwala Enterprises is Shahjahanpur's premier home appliance and electronics store on Town Hall Road. Authorized partner of Havells, Voltas, Blue Star."
+>
+  <!-- Hero / Introduction -->
+  <section class="bg-canvas-parchment py-[80px] border-b border-hairline px-lg">
+    <div class="max-w-[1440px] mx-auto text-center flex flex-col items-center gap-md">
+      <span class="text-tagline text-primary uppercase font-semibold tracking-wider font-display">Our Story</span>
+      <h1 class="text-hero-display text-ink font-semibold tracking-tight font-display leading-[1.07] uppercase">
+        SERVING SHAHJAHANPUR <span class="text-primary text-display-lg block">SINCE 2006</span>
+      </h1>
+      <p class="text-lead text-ink-muted-80 max-w-[800px] leading-relaxed font-light">
+        For nearly two decades, Jai Jwala Enterprises has been the trusted destination for premium electronics, cooling equipment, and home utilities.
+      </p>
+    </div>
+  </section>
+
+  <!-- Showroom Story -->
+  <section class="bg-canvas py-[80px] border-b border-hairline px-lg">
+    <div class="max-w-[1440px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-xl items-center">
+      <!-- Story Text -->
+      <div class="flex flex-col items-start gap-md text-left">
+        <h2 class="text-display-lg text-ink font-semibold tracking-tight font-display">
+          Building Trust Near Town Hall
+        </h2>
+        <div class="flex flex-col gap-sm text-body-copy text-ink-muted-80 leading-relaxed font-light">
+          <p>
+            Established in 2006, Jai Jwala Enterprises began with a simple mission: to supply the residents and businesses of Shahjahanpur, Uttar Pradesh, with authentic, high-quality electrical and cooling appliances.
+          </p>
+          <p>
+            Over the years, our showroom on Old Flyover Road (near the Town Hall Overbridge and Town Hall Hockey Club) has expanded its catalog to become a one-stop-shop. Today, we specialize in high-capacity water coolers for businesses and schools, split air conditioners, high-speed ceiling fans, refrigerators, smart TVs, and certified Havells modular wiring.
+          </p>
+          <p>
+            We believe that purchasing electronics should be a transparent process. We assist our customers with direct, specs-based consulting to ensure they invest in the right capacity and energy ratings.
+          </p>
+        </div>
+      </div>
+
+      <!-- Story Image -->
+      <div class="relative w-full overflow-hidden rounded-lg border border-hairline shadow-product">
+        <Image 
+          src={aboutShowroomImg} 
+          alt="Modern Home Appliance Showroom Interior" 
+          class="w-full h-auto object-cover aspect-[16/9] lg:aspect-[4/3] xl:aspect-[16/9]"
+          loading="lazy"
+          data-placeholder="true"
+        />
+        <!-- Overlay Accent -->
+        <div class="absolute inset-0 bg-gradient-to-t from-surface-black/20 to-transparent pointer-events-none"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Core Values -->
+  <section class="bg-canvas-parchment py-[80px] border-b border-hairline px-lg">
+    <div class="max-w-[1440px] mx-auto text-center flex flex-col items-center gap-md">
+      <span class="text-tagline text-primary uppercase font-semibold tracking-wider font-display">Our Values</span>
+      <h2 class="text-display-lg text-ink font-semibold tracking-tight font-display">
+        The Principles We Live By
+      </h2>
+      <p class="text-body-copy text-ink-muted-80 max-w-[600px] mb-lg leading-relaxed">
+        Our long-term relationship with customers in Shahjahanpur is built on three core pillars.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-lg w-full">
+        {values.map(v => (
+          <div class="bg-canvas border border-hairline rounded-lg p-lg shadow-sm flex flex-col items-start gap-sm text-left">
+            <span class="text-body-strong text-ink border-b-2 border-primary pb-xxs">{v.title}</span>
+            <p class="text-caption text-ink-muted-80 leading-relaxed font-light">{v.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Authorized Brands Showcase -->
+  <section class="bg-surface-tile-1 text-body-on-dark py-[80px] border-b border-black/40 px-lg">
+    <div class="max-w-[1440px] mx-auto text-center flex flex-col items-center gap-md">
+      <span class="text-tagline text-primary uppercase font-semibold tracking-wider font-display">Authorized Support</span>
+      <h2 class="text-display-lg text-body-on-dark font-semibold tracking-tight font-display">
+        Our Brand Partners
+      </h2>
+      <p class="text-body-copy text-body-muted max-w-[600px] mb-lg leading-relaxed">
+        We deal directly with manufacturers to ensure you get authentic equipment, factory-direct pricing, and official service support.
+      </p>
+
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-md w-full">
+        {brandPartners.map(brand => (
+          <div class="bg-surface-tile-2 border border-hairline/10 rounded-lg py-md px-sm flex items-center justify-center text-center">
+            <span class="text-body-strong text-body-on-dark/80 font-bold font-display uppercase tracking-widest">{brand}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Box -->
+  <section class="bg-canvas py-[80px] px-lg">
+    <div class="max-w-[980px] mx-auto bg-canvas-parchment border border-hairline rounded-lg p-xl text-center flex flex-col items-center gap-md shadow-sm">
+      <h2 class="text-display-lg text-ink font-semibold tracking-tight font-display">
+        Experience Premium Customer Care
+      </h2>
+      <p class="text-body-copy text-ink-muted-80 max-w-[600px] leading-relaxed">
+        Visit our showroom today at Town Hall Road or give us a call to discuss your cooling systems, smart TV, or home electrical wiring layout.
+      </p>
+      
+      <div class="flex flex-wrap gap-sm justify-center pt-sm w-full sm:w-auto">
+        <a href="/contact" class="bg-primary text-on-primary font-medium text-caption rounded-pill px-lg py-sm btn-scale-active shadow-sm border border-primary-focus hover:bg-primary-focus transition-all text-center flex-grow sm:flex-grow-0 focus:outline-2 focus:outline-primary-focus">
+          Contact Showroom
+        </a>
+        <a href="tel:09415035442" class="border border-primary text-primary font-medium text-caption rounded-pill px-lg py-sm btn-scale-active bg-transparent hover:bg-primary/5 transition-all text-center flex-grow sm:flex-grow-0 focus:outline-2 focus:outline-primary-focus">
+          Call 094150 35442
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>

@@ -1,0 +1,223 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { getCollection } from "astro:content";
+import { Image } from "astro:assets";
+
+// getStaticPaths for static generation of all dynamic products routes
+export async function getStaticPaths() {
+  const products = await getCollection("products");
+  return products.map((product) => ({
+    params: { slug: product.id },
+    props: { product },
+  }));
+}
+
+const { product } = Astro.props;
+
+// Dynamically resolve image assets
+const images = import.meta.glob<{ default: ImageMetadata }>("/src/assets/images/*.{jpeg,jpg,png,webp}");
+const imagePath = `/src/assets/images/${product.data.image}.jpg`;
+if (!images[imagePath]) {
+  throw new Error(`"${imagePath}" does not exist in glob: "/src/assets/images/*.{jpeg,jpg,png,webp}"`);
+}
+const productImage = images[imagePath]();
+
+// Get related products for internal linking (2-3 items)
+const allProducts = await getCollection("products");
+const relatedProducts = allProducts
+  .filter((p) => p.id !== product.id)
+  .slice(0, 3); // Pick 3 other categories
+
+// Service/Product Schema.org markup
+const productSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": `${product.data.title} Dealers in Shahjahanpur`,
+  "description": product.data.description,
+  "provider": {
+    "@type": "LocalBusiness",
+    "name": "Jai Jwala Enterprises",
+    "telephone": "+919415035442",
+    "priceRange": "$$",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Old Flyover Road, Town Hall Road",
+      "addressLocality": "Shahjahanpur",
+      "addressRegion": "Uttar Pradesh",
+      "postalCode": "242001",
+      "addressCountry": "IN"
+    }
+  },
+  "areaServed": {
+    "@type": "State",
+    "name": "Uttar Pradesh"
+  },
+  "brand": product.data.brands.map(b => ({
+    "@type": "Brand",
+    "name": b
+  }))
+};
+---
+
+<Layout 
+  title={product.data.seo.title}
+  description={product.data.seo.description}
+  keywords={product.data.seo.keywords}
+  customSchema={productSchema}
+>
+  <!-- Hero Category Section (Light parchment tile) -->
+  <section class="bg-canvas-parchment pt-[80px] pb-[100px] border-b border-hairline px-lg">
+    <div class="max-w-[1440px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-xl items-center">
+      <div class="flex flex-col items-start gap-md text-left">
+        <a href="/" class="text-caption text-primary hover:underline flex items-center gap-xxs focus:outline-2 focus:outline-primary-focus">
+          &larr; Back to Showroom
+        </a>
+        <span class="text-tagline text-primary uppercase font-semibold tracking-wider font-display">{product.data.category}</span>
+        <h1 class="text-hero-display text-ink font-semibold tracking-tight font-display leading-[1.07] uppercase">
+          {product.data.title} <span class="text-primary text-display-lg block">DEALERS</span>
+        </h1>
+        <p class="text-lead text-ink-muted-80 leading-relaxed font-light">
+          {product.data.tagline}
+        </p>
+        <p class="text-body-copy text-ink-muted-80 leading-relaxed">
+          {product.data.description}
+        </p>
+
+        <!-- Dynamic CTA link to contact form with product pre-selected -->
+        <div class="flex flex-wrap gap-sm pt-sm w-full sm:w-auto">
+          <a href={`/contact?product=${product.id}`} class="bg-primary text-on-primary font-medium text-body rounded-pill px-lg py-sm btn-scale-active shadow-sm border border-primary-focus hover:bg-primary-focus transition-all text-center flex-grow sm:flex-grow-0 focus:outline-2 focus:outline-primary-focus">
+            Request Quotation
+          </a>
+          <a href="tel:09415035442" class="border border-primary text-primary font-medium text-body rounded-pill px-lg py-sm btn-scale-active bg-transparent hover:bg-primary/5 transition-all text-center flex-grow sm:flex-grow-0 focus:outline-2 focus:outline-primary-focus">
+            Call Sales Consultant
+          </a>
+        </div>
+      </div>
+
+      <!-- Main Category Image Render -->
+      <div class="relative w-full max-w-[550px] mx-auto overflow-hidden rounded-lg bg-surface-tile-2 border border-hairline/20 p-xs shadow-product">
+        <Image 
+          src={productImage} 
+          alt={`${product.data.title} showroom model`}
+          class="w-full h-auto object-contain aspect-square rounded-sm"
+          loading="eager"
+          fetchpriority="high"
+          data-placeholder="true"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- Key Features Section (Dark tile) -->
+  <section class="bg-surface-tile-1 text-body-on-dark py-[80px] border-b border-black/40 px-lg">
+    <div class="max-w-[1440px] mx-auto text-center flex flex-col items-center gap-md">
+      <span class="text-tagline text-primary uppercase font-semibold tracking-wider font-display">Quality Features</span>
+      <h2 class="text-display-lg text-body-on-dark font-semibold tracking-tight font-display">
+        Product Specifications
+      </h2>
+      <p class="text-body-copy text-body-muted max-w-[600px] mb-lg leading-relaxed font-light">
+        Every system we sell is selected for energy savings, high-speed delivery, and longevity.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-lg w-full">
+        {product.data.features.map(f => (
+          <div class="bg-surface-tile-2 border border-hairline/10 rounded-lg p-lg text-left flex flex-col gap-sm">
+            <span class="text-body-strong text-body-on-dark font-semibold border-b border-primary/30 pb-xxs">{f.title}</span>
+            <p class="text-caption text-body-muted leading-relaxed font-light">{f.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Brands We Carry (Light Tile) -->
+  <section class="bg-canvas py-[80px] border-b border-hairline px-lg">
+    <div class="max-w-[1440px] mx-auto text-center flex flex-col items-center gap-md">
+      <span class="text-tagline text-primary uppercase font-semibold tracking-wider font-display">Authorized Brand Selection</span>
+      <h2 class="text-display-lg text-ink font-semibold tracking-tight font-display">
+        Brands We Support
+      </h2>
+      <p class="text-body-copy text-ink-muted-80 max-w-[600px] mb-lg leading-relaxed font-light">
+        We maintain official dealership rights to provide direct warranties and genuine spare parts.
+      </p>
+
+      <div class="flex flex-wrap justify-center gap-md w-full">
+        {product.data.brands.map(b => (
+          <div class="bg-canvas-parchment border border-hairline rounded-lg py-sm px-xl text-center shadow-sm select-none">
+            <span class="text-body-strong text-ink font-bold font-display uppercase tracking-widest">{b}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Spec Table / Models Grid (Store-utility-card style) -->
+  <section class="bg-canvas-parchment py-[80px] border-b border-hairline px-lg">
+    <div class="max-w-[1440px] mx-auto text-center flex flex-col items-center gap-md">
+      <span class="text-tagline text-primary uppercase font-semibold tracking-wider font-display">Pricing Guide</span>
+      <h2 class="text-display-lg text-ink font-semibold tracking-tight font-display">
+        Popular Models & Capacities
+      </h2>
+      <p class="text-body-copy text-ink-muted-80 max-w-[600px] mb-lg leading-relaxed font-light">
+        Explore detailed configurations and starting price guides for our popular showroom items.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-lg w-full">
+        {product.data.models.map(m => (
+          <div class="bg-canvas border border-hairline rounded-lg p-lg shadow-sm flex flex-col items-start gap-sm text-left">
+            <div class="w-full flex justify-between items-center border-b border-hairline pb-xs mb-xxs">
+              <span class="text-body-strong text-ink font-semibold">{m.name}</span>
+              <span class="text-caption text-primary font-semibold">{m.price}*</span>
+            </div>
+            <p class="text-caption text-ink-muted-80 leading-relaxed font-light">{m.spec}</p>
+            <a href={`/contact?product=${product.id}`} class="text-primary font-semibold text-caption mt-auto hover:underline">
+              Request Price Info &rarr;
+            </a>
+          </div>
+        ))}
+      </div>
+      <span class="text-fine-print text-ink-muted-48 block mt-md italic">* Prices are starting estimates, excluding GST and installation charges. Subject to seasonal discounts.</span>
+    </div>
+  </section>
+
+  <!-- Related Product Categories: Internal Linking (2-3 Items) -->
+  <section class="bg-canvas py-[80px] border-b border-hairline px-lg">
+    <div class="max-w-[1440px] mx-auto text-center flex flex-col items-center gap-md">
+      <span class="text-tagline text-primary uppercase font-semibold tracking-wider font-display">Related Categories</span>
+      <h2 class="text-display-lg text-ink font-semibold tracking-tight font-display font-semibold">
+        Explore Related Electronics
+      </h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-lg w-full mt-lg">
+        {relatedProducts.map(rp => (
+          <a href={`/products/${rp.id}`} class="bg-canvas-parchment border border-hairline hover:border-primary rounded-lg p-lg shadow-sm flex flex-col items-start gap-sm transition-all focus:outline-2 focus:outline-primary-focus text-left group">
+            <span class="text-body-strong text-ink group-hover:text-primary transition-colors">{rp.data.title}</span>
+            <p class="text-caption text-ink-muted-80 leading-relaxed font-light">{rp.data.tagline}</p>
+            <span class="text-primary font-semibold text-caption mt-auto group-hover:underline">Explore Category &rarr;</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Box -->
+  <section class="bg-surface-tile-1 text-body-on-dark py-[80px] px-lg">
+    <div class="max-w-[980px] mx-auto bg-surface-tile-2 border border-hairline/15 rounded-lg p-xl text-center flex flex-col items-center gap-md shadow-product">
+      <h2 class="text-display-lg text-body-on-dark font-semibold tracking-tight font-display">
+        Get an Instant Showroom Quote
+      </h2>
+      <p class="text-body-copy text-body-muted max-w-[600px] leading-relaxed font-light">
+        Submit your inquiries online for model pricing and stock status. Our Shahjahanpur customer support will reach back with options.
+      </p>
+      
+      <div class="flex flex-wrap gap-sm justify-center pt-sm w-full sm:w-auto">
+        <a href={`/contact?product=${product.id}`} class="bg-primary text-on-primary font-medium text-caption rounded-pill px-lg py-sm btn-scale-active shadow-sm border border-primary-focus hover:bg-primary-focus transition-all text-center flex-grow sm:flex-grow-0 focus:outline-2 focus:outline-primary-focus">
+          Send Online Request
+        </a>
+        <a href="tel:09415035442" class="border border-primary-on-dark text-primary-on-dark font-medium text-caption rounded-pill px-lg py-sm btn-scale-active bg-transparent hover:bg-white/5 transition-all text-center flex-grow sm:flex-grow-0 focus:outline-2 focus:outline-primary-focus">
+          Call Showroom
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>

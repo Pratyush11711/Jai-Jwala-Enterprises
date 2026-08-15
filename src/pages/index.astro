@@ -1,0 +1,308 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { Image } from "astro:assets";
+
+// Import images for optimization
+import heroShowcaseImg from "../assets/images/hero_showcase.jpg";
+import waterCoolerImg from "../assets/images/water_cooler.jpg";
+import acImg from "../assets/images/air_conditioner.jpg";
+import airCoolerImg from "../assets/images/air_cooler.jpg";
+import fridgeImg from "../assets/images/refrigerator.jpg";
+import homeTheaterImg from "../assets/images/led_tv.jpg";
+
+const categories = [
+  {
+    id: "water-coolers",
+    name: "Water Coolers",
+    tagline: "Instant chilling, built for Indian summers",
+    desc: "Commercial and residential stainless steel coolers from Blue Star and Voltas.",
+    image: waterCoolerImg,
+    category: "Commercial & Residential Cooling",
+    dark: false,
+  },
+  {
+    id: "air-conditioners",
+    name: "Air Conditioners",
+    tagline: "Smart cooling technology for reliable comfort",
+    desc: "Power-saving split and window ACs from Daikin, Voltas, and Lloyd.",
+    image: acImg,
+    category: "Home & Office Air Conditioning",
+    dark: true,
+  },
+  {
+    id: "air-coolers",
+    name: "Air Coolers",
+    tagline: "Eco-friendly and powerful Desert & Tower coolers",
+    desc: "Refreshing, low-energy evaporative cooling from Symphony and Bajaj.",
+    image: airCoolerImg,
+    category: "Evaporative Cooling",
+    dark: false,
+  },
+  {
+    id: "refrigerators",
+    name: "Refrigerators",
+    tagline: "Preserve freshness with smart inverter refrigeration",
+    desc: "Single-door, double-door, and smart side-by-side refrigerators.",
+    image: fridgeImg,
+    category: "Kitchen Appliances",
+    dark: true,
+  },
+  {
+    id: "home-theater",
+    name: "Home Theater & Sound Systems",
+    tagline: "Best Variety in the City — Immersive audio that moves you",
+    desc: "Premium soundbars, tower speakers, AV receivers, and multi-channel home theater from Sony, Samsung, JBL, and Bose. Transform your living room into a private cinema.",
+    image: homeTheaterImg,
+    category: "Premium Audio & Cinema",
+    dark: false,
+  },
+];
+
+const features = [
+  { title: "Authorized Partner", desc: "Official dealerships with authentic factory warranties from Voltas, Havells, Blue Star, Daikin, Symphony, and Samsung." },
+  { title: "Established 2006", desc: "Serving Shahjahanpur for nearly two decades with trusted electronics consulting and expert installations." },
+  { title: "Top-Rated Showroom", desc: "Highly rated on Google (5.0 stars) and Justdial (4.9 stars) for customer satisfaction and service quality." },
+  { title: "Hassle-Free Delivery", desc: "Quick delivery and professional installation services across Town Hall and local Shahjahanpur regions." },
+];
+
+const reviews = [
+  { name: "Rajesh Kumar", rating: 5, date: "July 2026", source: "Google", text: "Jai Jwala Enterprises is definitely the best electronics store in Shahjahanpur. Bought a Blue Star water cooler for our commercial kitchen. The pricing was lower than online rates, and they arranged delivery within 2 hours. Very satisfied!" },
+  { name: "Siddharth Mishra", rating: 5, date: "May 2026", source: "Justdial", text: "Best AC Dealers on Town Hall Road. We bought two Daikin split ACs for our office. The owner personally explained the power saving specs and inverter tech. Clean installation and superb customer service." },
+  { name: "Amit Sharma", rating: 5, date: "August 2026", source: "Google", text: "Highly recommend JJE for Havells electrical items. They have an extensive range of modular switches and safe copper wires. Honest rates, prompt response, and reliable UPI payment support." },
+];
+---
+
+<Layout 
+  title="Jai Jwala Enterprises | Authorized Electronics Showroom Shahjahanpur"
+  description="Authorized dealers of ACs, Water Coolers, Air Coolers, Refrigerators, LEDs, Fans, and Havells Electrical Goods in Shahjahanpur. Near Town Hall. Estd 2006."
+>
+  <!-- Hero Section: Alternating Parchment Tile Layout -->
+  <section class="bg-canvas-parchment pt-[80px] pb-[100px] border-b border-hairline px-lg">
+    <div class="max-w-[1440px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-xl items-center">
+      <div class="flex flex-col items-start gap-md">
+        <!-- Logo Badge -->
+        <div class="bg-surface-black border border-primary/20 rounded-lg p-sm shadow-sm select-none">
+          <img src="/logo.jpg" alt="Jai Jwala Logo Mark" class="h-[44px] object-contain" />
+        </div>
+        
+        <h1 class="text-hero-display text-ink font-semibold tracking-tight font-display leading-[1.07] uppercase">
+          PREMIUM <span class="text-primary text-display-lg block">ELECTRONICS SHOWROOM</span>
+        </h1>
+        <p class="text-lead text-ink-muted-80 leading-relaxed font-light max-w-[550px]">
+          Serving Shahjahanpur since 2006. Discover authentic appliances, water coolers, split ACs, smart TVs, and premium Havells wiring under one roof.
+        </p>
+
+        <!-- CTAs -->
+        <div class="flex flex-wrap gap-sm pt-sm w-full sm:w-auto">
+          <a href="/contact" class="bg-primary text-on-primary font-medium text-body rounded-pill px-lg py-sm btn-scale-active shadow-sm border border-primary-focus hover:bg-primary-focus transition-all text-center flex-grow sm:flex-grow-0 focus:outline-2 focus:outline-primary-focus">
+            Visit Showroom
+          </a>
+          <a href="tel:09415035442" class="border border-primary text-primary font-medium text-body rounded-pill px-lg py-sm btn-scale-active bg-transparent hover:bg-primary/5 transition-all text-center flex-grow sm:flex-grow-0 focus:outline-2 focus:outline-primary-focus">
+            Call Showroom
+          </a>
+        </div>
+      </div>
+
+      <!-- Hero Showcase Image -->
+      <div class="relative w-full overflow-hidden rounded-lg border border-hairline shadow-product">
+        <Image 
+          src={heroShowcaseImg} 
+          alt="Jai Jwala Enterprises Showroom Interior Shahjahanpur" 
+          class="w-full h-auto object-cover aspect-[16/9] lg:aspect-[4/3] xl:aspect-[16/9]"
+          loading="eager"
+          fetchpriority="high"
+          data-placeholder="true"
+        />
+        <!-- Overlay Accent -->
+        <div class="absolute inset-0 bg-gradient-to-t from-surface-black/30 to-transparent pointer-events-none"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Core Category Showcase Tiles: Alternating Light/Dark -->
+  {categories.map((c, index) => (
+    <section class={c.dark ? "bg-surface-tile-1 text-body-on-dark py-[80px] border-b border-black/40 px-lg" : "bg-canvas py-[80px] border-b border-hairline px-lg"}>
+      <div class="max-w-[1440px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-xl items-center">
+        <!-- Text Column -->
+        <div class={index % 2 === 1 ? "flex flex-col items-start gap-md lg:order-last" : "flex flex-col items-start gap-md"}>
+          <span class="text-tagline text-primary uppercase font-semibold tracking-wider font-display">{c.category}</span>
+          <h2 class={c.dark ? "text-display-lg text-body-on-dark font-semibold font-display tracking-tight" : "text-display-lg text-ink font-semibold font-display tracking-tight"}>
+            {c.name}
+          </h2>
+          <p class={c.dark ? "text-lead text-body-muted leading-relaxed font-light" : "text-lead text-ink-muted-80 leading-relaxed font-light"}>
+            {c.tagline}
+          </p>
+          <p class={c.dark ? "text-body-copy text-body-muted/80 leading-relaxed" : "text-body-copy text-ink-muted-80 leading-relaxed"}>
+            {c.desc}
+          </p>
+          
+          <div class="flex gap-sm pt-xs w-full sm:w-auto">
+            <a href={`/products/${c.id}`} class="bg-primary text-on-primary font-medium text-caption rounded-pill px-lg py-sm btn-scale-active shadow-sm border border-primary-focus hover:bg-primary-focus transition-all text-center flex-grow sm:flex-grow-0 focus:outline-2 focus:outline-primary-focus">
+              Explore Models
+            </a>
+            <a href={`/contact?category=${c.id}`} class={c.dark ? "border border-primary-on-dark text-primary-on-dark font-medium text-caption rounded-pill px-lg py-sm btn-scale-active bg-transparent hover:bg-white/5 transition-all text-center flex-grow sm:flex-grow-0 focus:outline-2 focus:outline-primary-focus" : "border border-primary text-primary font-medium text-caption rounded-pill px-lg py-sm btn-scale-active bg-transparent hover:bg-primary/5 transition-all text-center flex-grow sm:flex-grow-0 focus:outline-2 focus:outline-primary-focus"}>
+              Inquire Now
+            </a>
+          </div>
+        </div>
+
+        <!-- Image Render Column -->
+        <div class="flex justify-center">
+          <div class="relative w-full max-w-[500px] overflow-hidden rounded-lg bg-surface-tile-2 border border-hairline/20 p-xs shadow-product">
+            <Image 
+              src={c.image} 
+              alt={`${c.name} render showroom model`}
+              class="w-full h-auto object-contain aspect-square rounded-sm"
+              loading="lazy"
+              data-placeholder="true"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+  ))}
+
+  <!-- Link Grid for remaining products -->
+  <section class="bg-canvas-parchment py-[80px] border-b border-hairline px-lg">
+    <div class="max-w-[1440px] mx-auto text-center flex flex-col items-center gap-md">
+      <span class="text-tagline text-primary uppercase font-semibold tracking-wider font-display">Showroom Grid</span>
+      <h2 class="text-display-lg text-ink font-semibold tracking-tight font-display">
+        Additional Appliances & Goods
+      </h2>
+      <p class="text-body-copy text-ink-muted-80 max-w-[600px] mb-lg leading-relaxed">
+        Beyond our primary cooling range, we carry premium entertainment products, daily laundry aids, and certified Havells home electrical equipment.
+      </p>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-lg w-full">
+        <!-- LED TVs -->
+        <a href="/products/led-tvs" class="bg-canvas border border-hairline hover:border-primary rounded-lg p-lg shadow-sm flex flex-col items-start gap-sm transition-all focus:outline-2 focus:outline-primary-focus text-left group">
+          <span class="text-body-strong text-ink group-hover:text-primary transition-colors">LED TVs</span>
+          <p class="text-caption text-ink-muted-80 leading-relaxed">Smart 4K UHD screens and Google TVs from Samsung, Sony, and LG.</p>
+          <span class="text-primary font-semibold text-caption mt-auto group-hover:underline">Explore TVs &rarr;</span>
+        </a>
+        
+        <!-- Fans -->
+        <a href="/products/fans" class="bg-canvas border border-hairline hover:border-primary rounded-lg p-lg shadow-sm flex flex-col items-start gap-sm transition-all focus:outline-2 focus:outline-primary-focus text-left group">
+          <span class="text-body-strong text-ink group-hover:text-primary transition-colors">Ceiling & Exhaust Fans</span>
+          <p class="text-caption text-ink-muted-80 leading-relaxed">Energy saving BLDC fans and decorative ceiling fans from Havells and Atomberg.</p>
+          <span class="text-primary font-semibold text-caption mt-auto group-hover:underline">Explore Fans &rarr;</span>
+        </a>
+
+        <!-- Washing Machines -->
+        <a href="/products/washing-machines" class="bg-canvas border border-hairline hover:border-primary rounded-lg p-lg shadow-sm flex flex-col items-start gap-sm transition-all focus:outline-2 focus:outline-primary-focus text-left group">
+          <span class="text-body-strong text-ink group-hover:text-primary transition-colors">Washing Machines</span>
+          <p class="text-caption text-ink-muted-80 leading-relaxed">Semi and fully automatic top and front-load washers from LG and Samsung.</p>
+          <span class="text-primary font-semibold text-caption mt-auto group-hover:underline">Explore Washers &rarr;</span>
+        </a>
+
+        <!-- Electrical Goods -->
+        <a href="/products/electrical-goods" class="bg-canvas border border-hairline hover:border-primary rounded-lg p-lg shadow-sm flex flex-col items-start gap-sm transition-all focus:outline-2 focus:outline-primary-focus text-left group">
+          <span class="text-body-strong text-ink group-hover:text-primary transition-colors">Electrical Goods</span>
+          <p class="text-caption text-ink-muted-80 leading-relaxed">Authorized Havells building wires, Crabtree modular switches, and MCB protection.</p>
+          <span class="text-primary font-semibold text-caption mt-auto group-hover:underline">Explore Electrical &rarr;</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Choose Us: store-utility-card Grid -->
+  <section class="bg-canvas py-[80px] border-b border-hairline px-lg">
+    <div class="max-w-[1440px] mx-auto text-center flex flex-col items-center gap-md">
+      <span class="text-tagline text-primary uppercase font-semibold tracking-wider font-display">Why Choose Us</span>
+      <h2 class="text-display-lg text-ink font-semibold tracking-tight font-display">
+        The Showroom Commitment
+      </h2>
+      <p class="text-body-copy text-ink-muted-80 max-w-[600px] mb-lg leading-relaxed">
+        We bridge the gap between high-end product technology and reliable local service, backed by our 18+ year track record.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-lg w-full">
+        {features.map(f => (
+          <div class="bg-canvas border border-hairline rounded-lg p-lg shadow-sm flex flex-col items-start gap-sm text-left">
+            <div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold">
+              ✓
+            </div>
+            <span class="text-body-strong text-ink">{f.title}</span>
+            <p class="text-caption text-ink-muted-80 leading-relaxed">{f.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Summary Section -->
+  <section class="bg-surface-tile-1 text-body-on-dark py-[80px] border-b border-black/40 px-lg">
+    <div class="max-w-[1440px] mx-auto text-center flex flex-col items-center gap-md">
+      <span class="text-tagline text-primary uppercase font-semibold tracking-wider font-display">Testimonials</span>
+      <h2 class="text-display-lg text-body-on-dark font-semibold tracking-tight font-display">
+        Trusted By Local Residents
+      </h2>
+      <p class="text-body-copy text-body-muted max-w-[600px] mb-lg leading-relaxed">
+        Read review stories from homeowners, contractors, and local business operators in Shahjahanpur.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-lg w-full">
+        {reviews.map(r => (
+          <div class="bg-surface-tile-2 border border-hairline/10 rounded-lg p-lg text-left flex flex-col gap-sm">
+            <div class="flex justify-between items-center w-full">
+              <span class="text-body-strong text-body-on-dark font-semibold">{r.name}</span>
+              <span class="text-caption text-primary font-semibold">{r.source} Review</span>
+            </div>
+            <div class="flex text-primary">
+              {"★".repeat(r.rating)}
+            </div>
+            <p class="text-caption text-body-muted leading-relaxed font-light italic">
+              "{r.text}"
+            </p>
+            <span class="text-[12px] text-body-muted/60 mt-auto">{r.date}</span>
+          </div>
+        ))}
+      </div>
+
+      <a href="/reviews" class="mt-lg border border-primary-on-dark text-primary-on-dark font-medium text-caption rounded-pill px-lg py-sm btn-scale-active bg-transparent hover:bg-white/5 transition-all focus:outline-2 focus:outline-primary-focus">
+        Read All Testimonials &rarr;
+      </a>
+    </div>
+  </section>
+
+  <!-- Embedded Google Maps Section -->
+  <section class="bg-canvas-parchment py-[80px] px-lg border-b border-hairline">
+    <div class="max-w-[1440px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-xl items-center">
+      <div class="flex flex-col items-start gap-md text-left">
+        <span class="text-tagline text-primary uppercase font-semibold tracking-wider font-display">Our Showroom</span>
+        <h2 class="text-display-lg text-ink font-semibold tracking-tight font-display">
+          Visit Us in Shahjahanpur
+        </h2>
+        
+        <div class="flex flex-col gap-sm text-body-copy text-ink-muted-80 leading-relaxed font-light">
+          <p>
+            Our store is conveniently located on <strong>Old Flyover Road (Town Hall Road)</strong>, close to the <strong>Bus Stand Road</strong>, near the <strong>Town Hall Overbridge</strong> and <strong>Town Hall Hockey Club</strong>.
+          </p>
+          <div class="flex flex-col gap-xxs text-caption text-ink font-medium">
+            <div>📍 Old Flyover Road, Town Hall Road, Shahjahanpur, UP 242001</div>
+            <div>📞 Click to Call: <a href="tel:09415035442" class="text-primary hover:underline">094150 35442</a></div>
+            <div>⏰ Hours: 10:00 AM – 9:30 PM daily</div>
+          </div>
+        </div>
+
+        <a href="/contact" class="bg-primary text-on-primary font-medium text-caption rounded-pill px-lg py-sm btn-scale-active shadow-sm border border-primary-focus hover:bg-primary-focus transition-all focus:outline-2 focus:outline-primary-focus">
+          Get Driving Directions
+        </a>
+      </div>
+
+      <!-- Google Maps Embed Container -->
+      <div class="w-full overflow-hidden rounded-lg border border-hairline shadow-sm h-[350px]">
+        <iframe 
+          title="Jai Jwala Enterprises Shahjahanpur Showroom Map Location"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3527.1818276632426!2d79.9100223!3d27.8837059!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399f36fdfd58cf5f%3A0xe4a485ff7de3cfb9!2sTown%20Hall%2C%20Shahjahanpur%2C%20Uttar%20Pradesh%20242001!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" 
+          width="100%" 
+          height="100%" 
+          style="border:0;" 
+          allowfullscreen="" 
+          loading="lazy" 
+          referrerpolicy="no-referrer-when-downgrade"
+        ></iframe>
+      </div>
+    </div>
+  </section>
+</Layout>

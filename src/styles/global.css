@@ -1,0 +1,210 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #c9972c;
+  --color-primary-focus: #e8b923;
+  --color-primary-on-dark: #f4c430;
+  --color-ink: #1a1712;
+  --color-body: #1a1712;
+  --color-body-on-dark: #fdfaf3;
+  --color-body-muted: #d9d0b8;
+  --color-ink-muted-80: #3a3226;
+  --color-ink-muted-48: #8a7f68;
+  --color-divider-soft: #f2ecdb;
+  --color-hairline: #e6dcc0;
+  --color-canvas: #ffffff;
+  --color-canvas-parchment: #f7f1e2;
+  --color-surface-pearl: #faf6ec;
+  --color-surface-tile-1: #1c1a17;
+  --color-surface-tile-2: #201e1a;
+  --color-surface-tile-3: #171512;
+  --color-surface-black: #000000;
+  --color-surface-chip-translucent: rgba(201, 191, 160, 0.64);
+  --color-on-primary: #1a1712;
+  --color-on-dark: #fdfaf3;
+
+  --font-display: "SF Pro Display", "Inter", system-ui, -apple-system, sans-serif;
+  --font-text: "SF Pro Text", "Inter", system-ui, -apple-system, sans-serif;
+
+  --radius-none: 0px;
+  --radius-xs: 5px;
+  --radius-sm: 8px;
+  --radius-md: 11px;
+  --radius-lg: 18px;
+  --radius-pill: 9999px;
+  --radius-full: 9999px;
+
+  --spacing-xxs: 4px;
+  --spacing-xs: 8px;
+  --spacing-sm: 12px;
+  --spacing-md: 17px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-xxl: 48px;
+  --spacing-section: 80px;
+
+  --shadow-product: 3px 5px 30px 0px rgba(0, 0, 0, 0.22);
+}
+
+/* Typography Utilities */
+@utility text-hero-display {
+  font-family: var(--font-display);
+  font-size: 56px;
+  font-weight: 600;
+  line-height: 1.07;
+  letter-spacing: -0.02em; /* Approximates -0.28px for 56px size */
+}
+
+@utility text-display-lg {
+  font-family: var(--font-display);
+  font-size: 40px;
+  font-weight: 600;
+  line-height: 1.10;
+  letter-spacing: 0;
+}
+
+@utility text-display-md {
+  font-family: var(--font-text);
+  font-size: 34px;
+  font-weight: 600;
+  line-height: 1.47;
+  letter-spacing: -0.011em; /* Approximates -0.374px for 34px size */
+}
+
+@utility text-lead {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 1.14;
+  letter-spacing: 0.007em; /* Approximates 0.196px for 28px size */
+}
+
+@utility text-lead-airy {
+  font-family: var(--font-text);
+  font-size: 24px;
+  font-weight: 300;
+  line-height: 1.5;
+  letter-spacing: 0;
+}
+
+@utility text-tagline {
+  font-family: var(--font-display);
+  font-size: 21px;
+  font-weight: 600;
+  line-height: 1.19;
+  letter-spacing: 0.011em; /* Approximates 0.231px for 21px size */
+}
+
+@utility text-body-strong {
+  font-family: var(--font-text);
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1.24;
+  letter-spacing: -0.022em; /* Approximates -0.374px for 17px size */
+}
+
+@utility text-body-copy {
+  font-family: var(--font-text);
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.47;
+  letter-spacing: -0.022em; /* Approximates -0.374px for 17px size */
+}
+
+@utility text-dense-link {
+  font-family: var(--font-text);
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 2.41;
+  letter-spacing: 0;
+}
+
+@utility text-caption {
+  font-family: var(--font-text);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.43;
+  letter-spacing: -0.016em; /* Approximates -0.224px for 14px size */
+}
+
+@utility text-caption-strong {
+  font-family: var(--font-text);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.29;
+  letter-spacing: -0.016em; /* Approximates -0.224px for 14px size */
+}
+
+@utility text-button-large {
+  font-family: var(--font-text);
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 1.0;
+  letter-spacing: 0;
+}
+
+@utility text-button-utility {
+  font-family: var(--font-text);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.29;
+  letter-spacing: -0.016em; /* Approximates -0.224px for 14px size */
+}
+
+@utility text-fine-print {
+  font-family: var(--font-text);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.0;
+  letter-spacing: -0.01em; /* Approximates -0.12px for 12px size */
+}
+
+@utility text-micro-legal {
+  font-family: var(--font-text);
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 1.3;
+  letter-spacing: -0.008em; /* Approximates -0.08px for 10px size */
+}
+
+@utility text-nav-link {
+  font-family: var(--font-text);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.0;
+  letter-spacing: -0.01em; /* Approximates -0.12px for 12px size */
+}
+
+/* Component button base styles and transition presets */
+@utility btn-scale-active {
+  transition: transform 0.1s ease;
+  
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+/* Base style resets */
+body {
+  background-color: var(--color-canvas);
+  color: var(--color-body);
+  font-family: var(--font-text);
+  margin: 0;
+  padding: 0;
+}
+
+/* Custom Scrollbar styled premium */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-surface-tile-1);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-primary);
+  border-radius: var(--radius-sm);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary-focus);
+}
