@@ -20,9 +20,9 @@ const products = [
   <nav class="bg-surface-black h-[44px] flex items-center px-lg border-b border-white/10 select-none">
     <div class="max-w-[1440px] w-full mx-auto flex justify-between items-center">
       <!-- Logo Branding -->
-      <a href="/" class="h-[28px] flex items-center gap-xs focus:outline-2 focus:outline-primary-focus group">
-        <div class="bg-canvas-parchment/90 backdrop-blur-sm rounded-lg px-sm py-xs border border-primary/20 shadow-sm transition-all hover:border-primary/40 hover:shadow-md">
-          <img src="/logo.jpg" alt="Jai Jwala Logo" class="h-[24px] object-contain" />
+      <a href="/" class="flex items-center focus:outline-2 focus:outline-primary-focus group">
+        <div class="bg-canvas-parchment/90 backdrop-blur-sm rounded-md px-xs h-[32px] flex items-center justify-center border border-primary/20 shadow-sm transition-all hover:border-primary/40 hover:shadow-md">
+          <img src="/logo.jpg" alt="Jai Jwala Logo" class="h-[22px] object-contain" />
         </div>
       </a>
 
@@ -64,12 +64,15 @@ const products = [
   <div class="sticky top-0 bg-canvas-parchment/80 backdrop-blur-md h-[52px] flex items-center px-lg border-b border-hairline select-none shadow-sm">
     <div class="max-w-[1440px] w-full mx-auto flex justify-between items-center">
       <!-- Title -->
-      <span class="text-tagline text-ink font-semibold tracking-wider font-display">Jai Jwala Enterprises</span>
+      <span class="text-tagline text-ink font-semibold tracking-wider font-display">
+        <span class="inline sm:hidden">Jai Jwala</span>
+        <span class="hidden sm:inline">Jai Jwala Enterprises</span>
+      </span>
 
       <!-- Sub Links & Action -->
       <div class="flex items-center gap-lg">
         <a href="/contact" class="hidden sm:inline-block text-button-utility hover:text-primary transition-colors font-medium text-ink focus:outline-2 focus:outline-primary-focus">Inquire Now</a>
-        <a href="tel:09415035442" class="bg-primary text-on-primary font-medium text-caption rounded-pill px-[22px] py-[11px] btn-scale-active shadow-sm border border-primary-focus hover:bg-primary-focus transition-all flex items-center gap-xs focus:outline-2 focus:outline-primary-focus">
+        <a href="tel:09415035442" class="bg-primary text-on-primary font-medium text-caption rounded-pill px-md py-[8px] sm:px-[22px] sm:py-[11px] btn-scale-active shadow-sm border border-primary-focus hover:bg-primary-focus transition-all flex items-center gap-xs focus:outline-2 focus:outline-primary-focus whitespace-nowrap">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4">
             <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
           </svg>

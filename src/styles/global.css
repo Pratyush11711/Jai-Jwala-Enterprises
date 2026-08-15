@@ -49,50 +49,95 @@
 /* Typography Utilities */
 @utility text-hero-display {
   font-family: var(--font-display);
-  font-size: 56px;
+  font-size: 28px;
   font-weight: 600;
   line-height: 1.07;
   letter-spacing: -0.02em; /* Approximates -0.28px for 56px size */
+  
+  @media (width >= 420px) {
+    font-size: 34px;
+  }
+  @media (width >= 640px) {
+    font-size: 40px;
+  }
+  @media (width >= 1068px) {
+    font-size: 56px;
+  }
 }
 
 @utility text-display-lg {
   font-family: var(--font-display);
-  font-size: 40px;
+  font-size: 24px;
   font-weight: 600;
   line-height: 1.10;
   letter-spacing: 0;
+
+  @media (width >= 640px) {
+    font-size: 32px;
+  }
+  @media (width >= 1068px) {
+    font-size: 40px;
+  }
 }
 
 @utility text-display-md {
   font-family: var(--font-text);
-  font-size: 34px;
+  font-size: 20px;
   font-weight: 600;
   line-height: 1.47;
   letter-spacing: -0.011em; /* Approximates -0.374px for 34px size */
+
+  @media (width >= 640px) {
+    font-size: 28px;
+  }
+  @media (width >= 1068px) {
+    font-size: 34px;
+  }
 }
 
 @utility text-lead {
   font-family: var(--font-display);
-  font-size: 28px;
+  font-size: 18px;
   font-weight: 400;
   line-height: 1.14;
   letter-spacing: 0.007em; /* Approximates 0.196px for 28px size */
+
+  @media (width >= 640px) {
+    font-size: 22px;
+  }
+  @media (width >= 1068px) {
+    font-size: 28px;
+  }
 }
 
 @utility text-lead-airy {
   font-family: var(--font-text);
-  font-size: 24px;
+  font-size: 16px;
   font-weight: 300;
   line-height: 1.5;
   letter-spacing: 0;
+
+  @media (width >= 640px) {
+    font-size: 20px;
+  }
+  @media (width >= 1068px) {
+    font-size: 24px;
+  }
 }
 
 @utility text-tagline {
   font-family: var(--font-display);
-  font-size: 21px;
+  font-size: 14px;
   font-weight: 600;
   line-height: 1.19;
   letter-spacing: 0.011em; /* Approximates 0.231px for 21px size */
+
+  @media (width >= 640px) {
+    font-size: 18px;
+  }
+  @media (width >= 1068px) {
+    font-size: 21px;
+  }
 }
 
 @utility text-body-strong {
